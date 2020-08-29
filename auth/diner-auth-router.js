@@ -17,7 +17,7 @@ router.post("/register", async (req, res, next) => {
         message: "Username is already taken",
       });
     }
-    console.log(req.body);
+    // console.log(req.body);
     res.status(201).json(await Diners.add(req.body));
   } catch (err) {
     next(err);
@@ -29,7 +29,7 @@ router.post("/login", async (req, res, next) => {
   try {
     const { username, password } = req.body;
     const user = await Diners.findBy({ username }).first();
-    console.log(req.body);
+    // console.log(req.body);
     const passwordValid = await bcrypt.compare(password, user.password);
 
     if (!user || !passwordValid) {
@@ -38,10 +38,11 @@ router.post("/login", async (req, res, next) => {
       });
     }
 
-    // req.session.user = user;
+    const token = createToken(user)
 
+    res.cookie("token", token)
     res.json({
-      message: `Welcome ${user.username}!`,
+      message: `Welcome ${user.username}! have a token:`, token, user_id: user.id
     });
   } catch (err) {
     next(err);
@@ -60,5 +61,18 @@ router.get("/logout", authenticate(), (req, res, next) => {
     }
   });
 });
+
+function createToken(user) {
+	const payload = {
+		username: user.username,
+		id: user.id,
+	}
+	const secret = process.env.JWT_SECRET
+
+	const options = {
+		expiresIn: '1d',
+	}
+	return jwt.sign(payload, secret, options)
+}
 
 module.exports = router;

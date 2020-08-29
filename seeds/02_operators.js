@@ -5,9 +5,9 @@ exports.seed = function (knex) {
     .then(function () {
       // Inserts seed entries
       return knex("operators").insert([
-        { username: "operator 1", password: "abc123" },
-        { username: "operator 2", password: "abc123" },
-        { username: "operator 3", password: "abc123" },
+        { username: "operator1", password: "$2a$04$3YScrc/3N0aLj8fp8tiIuu20WFuj6jQ0wQiX9Y/wegssRWXP6.D36" },
+        { username: "operator2", password: "$2a$04$3YScrc/3N0aLj8fp8tiIuu20WFuj6jQ0wQiX9Y/wegssRWXP6.D36" },
+        { username: "operator3", password: "$2a$04$3YScrc/3N0aLj8fp8tiIuu20WFuj6jQ0wQiX9Y/wegssRWXP6.D36" },
       ]);
     });
 };
