@@ -20,7 +20,7 @@
   },
   "homepage": "https://github.com/hayesdev/Back-End#readme",
   "dependencies": {
-    "axios": "^0.19.0",
+    "axios": "^0.21.1",
     "bcryptjs": "^2.4.3",
     "connect-session-knex": "^1.6.0",
     "cookie-parser": "^1.4.5",
